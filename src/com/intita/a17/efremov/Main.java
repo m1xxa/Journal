@@ -14,6 +14,8 @@ public class Main {
 
         String[][] array = new String[][] {{"Vasiliy", "Ivan"},
                 {"Savitskiy", "Ivanov"}};
+        String[][] array2 = new String[][] {{"Vasiliy", "Petro"},
+                {"Savitskiy", "Petrov"}};
 
         Lesson javalesson = new Lesson("28.11.2017", "Java", "Magenta Room", groupA17);
         javalesson.addSeveralStudent(array);
@@ -23,6 +25,15 @@ public class Main {
         cSharpLesson.addSeveralStudent(array);
         groupA17.addNewLesson(cSharpLesson);
 
+        Lesson english = new Lesson("30.11.2017", "english", "Magenta Room", groupA17);
+        english.addSeveralStudent(array2);
+        groupA17.addNewLesson(english);
+
+
         System.out.println(groupA17.getJournal().getStudentPresentCount("Vasiliy", "Savitskiy"));
+
+        for(Student current : groupA17.getJournal().getStudentsByCountOfPresent(3)){
+            System.out.println(current.getSecondName());
+        }
     }
 }

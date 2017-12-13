@@ -1,6 +1,9 @@
 package com.intita.a17.efremov;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Journal {
     private Lesson[] lessons = new Lesson[500];
@@ -30,5 +33,34 @@ public class Journal {
             }
         }
         return count;
+    }
+
+    public List<Student> getStudentsByCountOfPresent(int count){
+        List<Student> listOfStudents = new ArrayList<>();
+        HashMap<Student, Integer> studentsMap = new HashMap<Student, Integer>();
+
+        for (int i = 0; i < lessons_count; i++) {
+            for(Student currentStudent : lessons[i].getStudents()){
+                if(studentsMap.containsKey(currentStudent)){
+                    int c = studentsMap.get(currentStudent);
+                    studentsMap.put(currentStudent, ++c);
+                }
+                else {
+                    studentsMap.put(currentStudent, 1);
+                }
+            }
+        }
+
+        for(Map.Entry entry : studentsMap.entrySet()){
+            int value = (int)entry.getValue();
+            Student student = (Student)entry.getKey();
+
+            if(value >= count){
+                listOfStudents.add(student);
+            }
+
+        }
+
+        return listOfStudents;
     }
 }
